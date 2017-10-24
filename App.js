@@ -1,6 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
+import { Constants } from 'expo';
+import DeckListView from './components/DeckListView';
+import { TabNavigator } from 'react-navigation';
 import { populateDummyData, getDecks, getDeck, saveDeckTitle, addCardToDeck } from './util/api';
+
+const UdaciCardsTabNavigator = TabNavigator({
+  Decks: {
+    screen: DeckListView,
+    navigationOptions: {
+      tabBarLabel: 'Decks'
+    },
+  },
+  NewDeck: {
+    screen: DeckListView,
+    navigationOptions: {
+      tabBarLabel: 'Add Deck'
+    },
+  }
+}, {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    activeTintColor: '#123456',
+    style: {
+      height: 56,
+      backgroundColor: 'white',
+      shadowColor: 'rgba(0, 0, 0, 0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
+    }
+  }
+});
+
 
 export default class App extends React.Component {
 
@@ -30,18 +67,12 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>{this.state.data && JSON.stringify(this.state.data)}</Text>
+      <View style={{flex: 1}}>
+        <View style={{ height: Constants.statusBarHeight }}>
+            <StatusBar translucent />
+        </View>
+        <UdaciCardsTabNavigator />
       </View>
-    );
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
