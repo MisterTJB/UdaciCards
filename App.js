@@ -1,13 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { populateDummyData, getDecks, getDeck, saveDeckTitle, addCardToDeck } from './util/api';
 
 export default class App extends React.Component {
+
+  state = {
+    data: null
+  }
+
+  componentDidMount(){
+    populateDummyData()
+      .then( _ => {
+        return saveDeckTitle('NEW DECK')
+      })
+      .then( _ => {
+        return getDecks()
+      })
+      .then( _ => {
+        return addCardToDeck('NEW DECK', { question: "A QUESTION", answer: "ANSWER"})
+      })
+      .then( _ => {
+        return getDeck("NEW DECK")
+      })
+      .then( data => {
+        this.setState({ data })
+      })
+
+
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>{this.state.data && JSON.stringify(this.state.data)}</Text>
       </View>
     );
   }
