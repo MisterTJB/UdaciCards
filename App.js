@@ -3,25 +3,16 @@ import { StatusBar, View } from 'react-native';
 import { Constants } from 'expo';
 import DeckListView from './components/DeckListView';
 import { TabNavigator } from 'react-navigation';
-import { populateDummyData, getDecks, getDeck, saveDeckTitle, addCardToDeck } from './util/api';
+import NewDeckView from './components/NewDeckView';
 
 const UdaciCardsTabNavigator = TabNavigator({
   Decks: {
     screen: DeckListView,
-    navigationOptions: {
-      tabBarLabel: 'Decks'
-    },
   },
   NewDeck: {
-    screen: DeckListView,
-    navigationOptions: {
-      tabBarLabel: 'Add Deck'
-    },
+    screen: NewDeckView
   }
 }, {
-  navigationOptions: {
-    header: null
-  },
   tabBarOptions: {
     activeTintColor: '#123456',
     style: {
@@ -42,29 +33,13 @@ const UdaciCardsTabNavigator = TabNavigator({
 export default class App extends React.Component {
 
   state = {
-    data: null
+    shouldUpdate: false
   }
 
-  componentDidMount(){
-    populateDummyData()
-      .then( _ => {
-        return saveDeckTitle('NEW DECK')
-      })
-      .then( _ => {
-        return getDecks()
-      })
-      .then( _ => {
-        return addCardToDeck('NEW DECK', { question: "A QUESTION", answer: "ANSWER"})
-      })
-      .then( _ => {
-        return getDeck("NEW DECK")
-      })
-      .then( data => {
-        this.setState({ data })
-      })
-
-
+  shouldUpdate = (shouldUpdate) => {
+    this.setState( { shouldUpdate })
   }
+
   render() {
     return (
       <View style={{flex: 1}}>

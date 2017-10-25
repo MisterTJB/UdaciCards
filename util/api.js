@@ -2,6 +2,16 @@
 
 import { AsyncStorage } from 'react-native'
 
+let observers = []
+
+export const registerObserver = o => {
+  observers.push(o);
+}
+
+const notifyObservers = _ => {
+  observers.map( o => o.update());
+}
+
 export const populateDummyData = _ => {
   const data =
   {
@@ -53,6 +63,7 @@ Take in a single title argument and add it to the decks.
 export const saveDeckTitle = (title) => {
   let newDeck = { title, questions: []}
   return AsyncStorage.mergeItem('DECKS', JSON.stringify({ [title]: newDeck }))
+                      .then(notifyObservers())
 }
 
 /*

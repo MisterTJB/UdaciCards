@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
-import { getDecks } from '../util/api';
+import { getDecks, registerObserver } from '../util/api';
 import DeckListItem from './DeckListItem';
 
 export default class DeckListView extends Component {
+
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: "UdaciCards",
+    tabBarLabel: "My Decks",
+    tabBarOnPress: (nextRoute, jumpToIndex) => {
+      jumpToIndex(nextRoute.index);
+    }
+  });
 
   state = {
     deck: []
   }
 
-  componentWillMount(){
+  update = _ => {
     getDecks().then( data => {
 
       let deck = Object.keys(data).map( deckName => {
@@ -23,6 +31,11 @@ export default class DeckListView extends Component {
         deck
       })
     })
+  }
+
+  componentWillMount(){
+    registerObserver(this);
+    this.update();
   }
 
   keyExtractor = (item, index) => index
