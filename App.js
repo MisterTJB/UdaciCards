@@ -2,8 +2,10 @@ import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { Constants } from 'expo';
 import DeckListView from './components/DeckListView';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import NewDeckView from './components/NewDeckView';
+import DeckView from './components/DeckView';
+
 
 const UdaciCardsTabNavigator = TabNavigator({
   Decks: {
@@ -29,6 +31,16 @@ const UdaciCardsTabNavigator = TabNavigator({
   }
 });
 
+const UdaciCardsStackNavigator = StackNavigator({
+  Home: {
+    screen: UdaciCardsTabNavigator
+  },
+  DeckView: {
+    screen: DeckView,
+    path: 'deck/:title',
+  }
+});
+
 
 export default class App extends React.Component {
 
@@ -43,10 +55,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <View style={{ height: Constants.statusBarHeight }}>
-            <StatusBar translucent />
-        </View>
-        <UdaciCardsTabNavigator />
+        <UdaciCardsStackNavigator />
       </View>
     )
   }

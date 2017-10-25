@@ -12,6 +12,10 @@ const notifyObservers = _ => {
   observers.map( o => o.update());
 }
 
+export const removeObserver = o => {
+  observers = observers.filter( observer => observer === o )
+}
+
 export const populateDummyData = _ => {
   const data =
   {

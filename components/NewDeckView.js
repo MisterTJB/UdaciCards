@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 
 import { saveDeckTitle } from '../util/api';
 
+
+
 const styles = {
   container: {
     flex: 1,
@@ -34,6 +36,8 @@ export default class NewDeckView extends Component {
     tabBarLabel: "Add Deck"
   });
 
+
+
   state = {
     title: ''
   }
@@ -41,7 +45,10 @@ export default class NewDeckView extends Component {
   saveDeck = _ => {
     saveDeckTitle(this.state.title)
       .then( _ => {
+        const { navigate } = this.props.navigation;
+        navigate('DeckView', { title: this.state.title })
         this.setState({ title: '' })
+
       })
   }
 

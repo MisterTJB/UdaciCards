@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
-import { getDecks, registerObserver } from '../util/api';
+import { getDecks, registerObserver, removeObserver } from '../util/api';
 import DeckListItem from './DeckListItem';
 
 export default class DeckListView extends Component {
@@ -36,6 +36,10 @@ export default class DeckListView extends Component {
   componentWillMount(){
     registerObserver(this);
     this.update();
+  }
+
+  componentWillUnmount(){
+    removeObserver(this);
   }
 
   keyExtractor = (item, index) => index
