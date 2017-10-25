@@ -65,7 +65,7 @@ export default class DeckListView extends Component {
 
   render(){
     return (
-        <FlatList style={{height: 100, backgroundColor: '#123456'}} data={this.state.deck}
+        <FlatList style={{height: 100}} data={this.state.deck}
                   keyExtractor={this.keyExtractor}
                   renderItem={this.renderDeckListItem}
                   ItemSeparatorComponent={this.renderSeparator}
