@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const styles = {
   container: {
@@ -12,15 +12,20 @@ const styles = {
 
 export default class DeckListItem extends Component {
 
+  onPress = _ => {
+    let { title, onPress } = this.props;
+    onPress(title);
+  }
+
   render(){
 
     let { title, cardCount } = this.props;
 
     return (
-      <View style={styles.container}>
+      <TouchableOpacity onPress={this.onPress} style={styles.container}>
         <Text>{title}</Text>
         <Text>{cardCount} cards</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 }

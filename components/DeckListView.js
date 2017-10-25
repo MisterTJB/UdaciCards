@@ -45,7 +45,12 @@ export default class DeckListView extends Component {
   keyExtractor = (item, index) => index
 
   renderDeckListItem = ( {item} ) => {
-    return <DeckListItem title={item.title} cardCount={item.cardCount}/>
+    return <DeckListItem onPress={this.onPress} title={item.title} cardCount={item.cardCount}/>
+  }
+
+  onPress = (title) => {
+    const { navigate } = this.props.navigation;
+    navigate("DeckView", { title })
   }
 
   renderSeparator = () => {
