@@ -36,8 +36,6 @@ export default class NewDeckView extends Component {
     tabBarLabel: "Add Deck"
   });
 
-
-
   state = {
     title: ''
   }
