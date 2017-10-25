@@ -39,12 +39,18 @@ export default class NewQuestion extends Component {
   }
 
   saveCard = _ => {
-    addCardToDeck(this.state.title, this.state.question)
-      .then( _ => {
-        const { navigate } = this.props.navigation;
-        navigate.back()
-        this.setState({ answer: '', question: ''})
+    console.log("SAVING CARD")
+    let qa = {
+      question: this.state.question,
+      answer: this.state.answer
+    }
+    
+    let { title } = this.props.navigation.state.params;
 
+    addCardToDeck(title, qa)
+      .then( _ => {
+        console.log("ADDED TO DECK")
+        this.setState({ answer: '', question: ''})
       })
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { getDeck } from '../util/api';
+import { getDeck, registerObserver, removeObserver } from '../util/api';
 import NewQuestion from './NewQuestion';
 
 const styles = {
@@ -35,12 +35,6 @@ const styles = {
   }
 }
 
-/*
-Add the relevant data to the UI, retrieved from api.getDeck(title).
-This will be a Text element with the deck title, a Text element with the number
-of cards in the deck*, a TouchableOpacity with the option to start a quiz, and
-a TouchableOpacity with the option to add a new question to the deck
-*/
 export default class DeckView extends Component {
 
   state = {
@@ -48,23 +42,46 @@ export default class DeckView extends Component {
     questions: []
   }
 
-  componentDidMount(){
-    let { title } = this.props.navigation.state.params;
+  update = _ => {
 
+    let { title } = this.props.navigation.state.params;
+    console.log(`DeckView with title ${title} will update`)
     getDeck(title).then( deck => {
-      this.setState({ title, ...deck })
+      console.log("In getDeck callback")
+      console.log(this.state);
+      this.setState({ title: deck.title, questions: deck.questions });
     })
+  }
+
+  componentDidMount(){
+    registerObserver(this);
+    this.update();
+  }
+
+  componentWillUnmount(){
+    console.log("DeckView will unmount")
+    removeObserver(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    console.log("Deck view will update with nextState");
+    console.log(nextState)
   }
 
   navigateToNewQuestion = _ => {
     let { navigate } = this.props.navigation;
-    let { title } = this.state.title;
+    let { title } = this.state;
+    console.log(`Will navigate to NewQuestion with { title: ${title} } `)
     navigate('NewQuestion', { title })
   }
 
   navigateToQuiz = _ => {
     let { navigate } = this.props.navigation;
-    let { title } = this.state.title;
+    let { title } = this.state;
     navigate('QuizView', { title })
   }
 

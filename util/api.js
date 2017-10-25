@@ -9,38 +9,13 @@ export const registerObserver = o => {
 }
 
 const notifyObservers = _ => {
-  observers.map( o => o.update());
+  observers.map( (o, i) => {
+    o.update();
+  });
 }
 
 export const removeObserver = o => {
-  observers = observers.filter( observer => observer === o )
-}
-
-export const populateDummyData = _ => {
-  const data =
-  {
-    React: {
-      title: 'React',
-      questions: [
-        {
-          question: 'What is React?',
-          answer: 'A library for managing user interfaces'
-        }, {
-          answer: 'The componentDidMount lifecycle event'
-        }
-      ]
-    },
-    JavaScript: {
-      title: 'JavaScript',
-      questions: [
-        {
-          question: 'What is a closure?',
-          answer: 'The combination of a function and the lexical environment within which that function was declared.'
-        }
-      ]
-    }
-  }
-  return AsyncStorage.setItem('DECKS', JSON.stringify(data))
+  observers = observers.filter( observer => observer !== o)
 }
 
 /*
@@ -80,7 +55,7 @@ export const addCardToDeck = (title, card) => {
       let cards = JSON.parse(data)[title].questions
       let newDeck = { title, questions: [...cards, card] }
       return AsyncStorage.mergeItem('DECKS', JSON.stringify({ [title]: newDeck })
-      )
+      ).then(notifyObservers())
     }
   )
 }

@@ -16,6 +16,7 @@ export default class DeckListView extends Component {
   }
 
   update = _ => {
+    console.log(`ListView will update`)
     getDecks().then( data => {
 
       let deck = Object.keys(data).map( deckName => {
@@ -30,7 +31,7 @@ export default class DeckListView extends Component {
     })
   }
 
-  componentWillMount(){
+  componentDidMount(){
     registerObserver(this);
     this.update();
   }
@@ -63,7 +64,6 @@ export default class DeckListView extends Component {
   };
 
   render(){
-    console.log("Will render")
     return (
         <FlatList style={{height: 100, backgroundColor: '#123456'}} data={this.state.deck}
                   keyExtractor={this.keyExtractor}
