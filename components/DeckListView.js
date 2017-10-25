@@ -8,10 +8,7 @@ export default class DeckListView extends Component {
 
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: "UdaciCards",
-    tabBarLabel: "My Decks",
-    tabBarOnPress: (nextRoute, jumpToIndex) => {
-      jumpToIndex(nextRoute.index);
-    }
+    tabBarLabel: "My Decks"
   });
 
   state = {

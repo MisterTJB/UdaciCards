@@ -5,7 +5,8 @@ import DeckListView from './components/DeckListView';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import NewDeckView from './components/NewDeckView';
 import DeckView from './components/DeckView';
-
+import NewQuestion from './components/NewQuestion';
+import QuizView from './components/QuizView';
 
 const UdaciCardsTabNavigator = TabNavigator({
   Decks: {
@@ -37,7 +38,15 @@ const UdaciCardsStackNavigator = StackNavigator({
   },
   DeckView: {
     screen: DeckView,
-    path: 'deck/:title',
+    path: 'deck/:title'
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    path: 'new/:title'
+  },
+  QuizView: {
+    screen: QuizView,
+    path: 'quiz/:title'
   }
 });
 
