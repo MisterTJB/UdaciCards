@@ -7,6 +7,9 @@ import NewDeckView from './components/NewDeckView';
 import DeckView from './components/DeckView';
 import NewQuestion from './components/NewQuestion';
 import QuizView from './components/QuizView';
+import { setLocalNotification } from './util/notifications';
+
+import { AsyncStorage } from 'react-native';
 
 const UdaciCardsTabNavigator = TabNavigator({
   Decks: {
@@ -53,12 +56,8 @@ const UdaciCardsStackNavigator = StackNavigator({
 
 export default class App extends React.Component {
 
-  state = {
-    shouldUpdate: false
-  }
-
-  shouldUpdate = (shouldUpdate) => {
-    this.setState( { shouldUpdate })
+  componentDidMount(){
+    setLocalNotification()
   }
 
   render() {

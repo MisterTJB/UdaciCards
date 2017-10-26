@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { setLocalNotification } from '../util/notifications';
 
 import { getDeck } from '../util/api';
 
@@ -71,6 +72,10 @@ export default class QuizView extends Component {
     })
   }
 
+  quizCompleted = _ => {
+    setLocalNotification();
+  }
+
   restart = _ => {
     this.setState({
       showAnswer: false,
@@ -82,6 +87,14 @@ export default class QuizView extends Component {
   backToDeck = _ => {
     let { goBack } = this.props.navigation;
     goBack();
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    // If the quiz moves in to the compeleted state, remove
+    // local notifications
+    if (nextState.questionIndex == nextState.questions.length) {
+      this.quizCompleted();
+    }
   }
 
   render(){

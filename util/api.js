@@ -22,9 +22,11 @@ export const removeObserver = o => {
 Return all of the decks along with their titles, questions, and answers.
 */
 export const getDecks = _ => {
-  return AsyncStorage.getItem('DECKS').then( data => {
-    return JSON.parse(data)
-  })
+  return AsyncStorage.getItem('DECKS')
+    .then( data => {
+      return JSON.parse(data)
+    })
+
 }
 
 /*

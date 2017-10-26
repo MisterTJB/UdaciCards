@@ -45,10 +45,7 @@ export default class DeckView extends Component {
   update = _ => {
 
     let { title } = this.props.navigation.state.params;
-    console.log(`DeckView with title ${title} will update`)
     getDeck(title).then( deck => {
-      console.log("In getDeck callback")
-      console.log(this.state);
       this.setState({ title: deck.title, questions: deck.questions });
     })
   }
@@ -59,7 +56,6 @@ export default class DeckView extends Component {
   }
 
   componentWillUnmount(){
-    console.log("DeckView will unmount")
     removeObserver(this);
   }
 
@@ -67,15 +63,9 @@ export default class DeckView extends Component {
     return true;
   }
 
-  componentWillUpdate(nextProps, nextState){
-    console.log("Deck view will update with nextState");
-    console.log(nextState)
-  }
-
   navigateToNewQuestion = _ => {
     let { navigate } = this.props.navigation;
     let { title } = this.state;
-    console.log(`Will navigate to NewQuestion with { title: ${title} } `)
     navigate('NewQuestion', { title })
   }
 
