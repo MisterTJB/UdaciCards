@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { addCardToDeck } from '../util/api';
 
@@ -57,7 +57,7 @@ export default class NewQuestion extends Component {
 
   render(){
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior={'padding'} style={styles.container}>
         <View style={styles.input}>
           <Text>Question</Text>
           <TextInput
@@ -77,7 +77,7 @@ export default class NewQuestion extends Component {
         <TouchableOpacity style={styles.button} onPress={this.saveCard}>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
