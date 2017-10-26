@@ -30,7 +30,7 @@ const styles = {
     backgroundColor: 'white',
     borderRadius: 5,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonText: {
     color: 'rgb(0, 122, 255)'
@@ -45,7 +45,6 @@ export default class DeckView extends Component {
   }
 
   update = _ => {
-
     let { title } = this.props.navigation.state.params;
     getDeck(title).then( deck => {
       this.setState({ title: deck.title, questions: deck.questions });
@@ -59,10 +58,6 @@ export default class DeckView extends Component {
 
   componentWillUnmount(){
     removeObserver(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    return true;
   }
 
   navigateToNewQuestion = _ => {
@@ -80,6 +75,7 @@ export default class DeckView extends Component {
   render(){
 
     let { title, questions } = this.state;
+    let buttonOpacity = questions.length < 1 ? styles.buttonDisabled : styles.buttonEnabled
 
     return (
       <View style={styles.container}>
@@ -89,6 +85,7 @@ export default class DeckView extends Component {
           <TouchableOpacity style={styles.button} onPress={this.navigateToNewQuestion}>
             <Text style={styles.buttonText}>Add Question</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.button} onPress={this.navigateToQuiz}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
