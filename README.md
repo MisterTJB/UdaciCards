@@ -4,7 +4,7 @@ This project implements a basic flashcard app with React Native
 
 ## Installation
 
-To run the app:
+To run the app on an iOS device:
 
 1. Clone this repository
 2. Navigate to the cloned directory and run `yarn start` from a terminal
@@ -15,6 +15,17 @@ app installed on an iOS device, open Expo app and choose Scan QR Code
 
 The UdaciCards app should now be running in Expo on the device.
 
+To run the app on the iOS simulator (requires Xcode):
+
+1. Clone this repository
+2. Navigate to the cloned directory and run `yarn start` from a terminal
+3. When the packager is ready, you will be invited to 'press i' to launch
+the iOS simulator
+
+The iOS simulator should launch, and subsequently launch the UdaciCards
+app in the simulated environment
+
 ## Platform
 
-The app compiles and runs without error on an iPhone 7.
+The app compiles and runs without error on an iPhone 7, and on the iPhone 7
+in the iOS simulator
