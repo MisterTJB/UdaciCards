@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { FontAwesome } from '@expo/vector-icons';
 import { saveDeckTitle } from '../util/api';
-
-
 
 const styles = {
   container: {
@@ -37,7 +35,8 @@ export default class NewDeckView extends Component {
 
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: "Add a Deck",
-    tabBarLabel: "Add Deck"
+    tabBarLabel: "Add Deck",
+    tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={24} color={tintColor} />
   });
 
   state = {

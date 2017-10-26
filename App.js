@@ -20,7 +20,6 @@ const UdaciCardsTabNavigator = TabNavigator({
   }
 }, {
   tabBarOptions: {
-    activeTintColor: '#123456',
     style: {
       height: 56,
       backgroundColor: 'white',

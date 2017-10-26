@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
-
 import { getDecks, registerObserver, removeObserver } from '../util/api';
+import { FontAwesome } from '@expo/vector-icons';
 import DeckListItem from './DeckListItem';
 
 export default class DeckListView extends Component {
 
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: "UdaciCards",
-    tabBarLabel: "My Decks"
+    tabBarLabel: "My Decks",
+    tabBarIcon: ({ tintColor }) => <FontAwesome name='stack-overflow' size={24} color={tintColor} />
   });
 
   state = {
