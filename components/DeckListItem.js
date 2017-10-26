@@ -4,10 +4,22 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 const styles = {
   container: {
     flex: 1,
+    flexDirection: 'row',
     height: 100,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    backgroundColor: 'white'
+  },
+  deckTitle: {
+    fontSize: 24,
+    paddingLeft: 24,
+    fontWeight: 'bold',
+    flexBasis: '70%'
+  },
+  deckCardinality: {
+    paddingRight: 24
   }
+
 }
 
 export default class DeckListItem extends Component {
@@ -23,8 +35,8 @@ export default class DeckListItem extends Component {
 
     return (
       <TouchableOpacity onPress={this.onPress} style={styles.container}>
-        <Text>{title}</Text>
-        <Text>{cardCount} cards</Text>
+        <Text style={styles.deckTitle}>{title}</Text>
+        <Text style={styles.deckCardinality}>{cardCount} { cardCount === 1 ? "card" : "cards"}</Text>
       </TouchableOpacity>
     )
   }

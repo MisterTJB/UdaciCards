@@ -18,14 +18,18 @@ const styles = {
   textInput: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    backgroundColor: 'white'
   },
   button: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'green',
-    padding: 22,
+    backgroundColor: 'white',
+    padding: 16,
+    paddingLeft: 44,
+    paddingRight: 44,
     borderRadius: 5
+  },
+  buttonText: {
+    color: 'rgb(0, 122, 255)'
   }
 }
 
@@ -62,7 +66,7 @@ export default class NewDeckView extends Component {
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={this.saveDeck}>
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
       </View>
     );

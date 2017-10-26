@@ -6,9 +6,10 @@ import { getDeck } from '../util/api';
 
 const styles = {
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginTop: '10%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '80%'
   },
   input: {
     width: '80%',
@@ -20,16 +21,25 @@ const styles = {
     borderWidth: 1
   },
   buttonContainer: {
-    width: '75%',
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   button: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     padding: 22,
-    borderRadius: 5
+    width: '45%',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: 'rgb(0, 122, 255)'
+  },
+  mainText: {
+    textAlign: 'center',
+    fontSize: 36,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 }
 
@@ -104,17 +114,20 @@ export default class QuizView extends Component {
 
     if (questionIndex == questions.length){
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, , {justifyContent: 'center'}]}>
           <View>
-            <Text>{this.state.score}</Text>
+            <Text style={styles.mainText}>You scored</Text>
+            <Text style={[styles.mainText, {marginBottom: 100}]}>
+            {((this.state.score / this.state.questions.length)*100).toFixed(2)}%
+            </Text>
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}  onPress={this.restart}>
-              <Text>Restart</Text>
+            <TouchableOpacity style={[styles.button, {marginRight: 10}]} onPress={this.restart}>
+              <Text style={styles.buttonText}>Restart</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={this.backToDeck}>
-              <Text>Back to Deck</Text>
+              <Text style={styles.buttonText}>Back to Deck</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -127,17 +140,14 @@ export default class QuizView extends Component {
 
       return (
         <View style={styles.container}>
-          <View>
-            <Text>Question {questionIndex + 1} of {questions.length}</Text>
-          </View>
-          <Text>{questionAnswer.answer}</Text>
+          <Text style={styles.mainText}>{questionAnswer.answer}</Text>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity  style={styles.button} onPress={this.correct}>
-              <Text>Correct</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor: 'green', marginRight: 10}]} onPress={this.correct}>
+              <Text style={[styles.buttonText, {color: 'white'}]}>Correct</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, {backgroundColor: 'red'}]}  onPress={this.incorrect}>
-              <Text>Incorrect</Text>
+              <Text style={[styles.buttonText, {color: 'white'}]}>Incorrect</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -147,12 +157,13 @@ export default class QuizView extends Component {
 
     return (
       <View style={styles.container}>
+        <Text style={styles.mainText}>{questionAnswer.question}</Text>
         <View>
           <Text>Question {questionIndex + 1} of {questions.length}</Text>
         </View>
-        <Text>{questionAnswer.question}</Text>
+
         <TouchableOpacity style={styles.button} onPress={this.showAnswer}>
-          <Text>Show Answer</Text>
+          <Text style={styles.buttonText}>Show Answer</Text>
         </TouchableOpacity>
       </View>
     );

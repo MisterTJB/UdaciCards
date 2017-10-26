@@ -12,10 +12,12 @@ const styles = {
     marginBottom: 100
   },
   deckTitle: {
-    fontSize: 24
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   cardCount: {
-    fontSize: 20
+    fontSize: 50
   },
   buttonContainer: {
     width: '75%',
@@ -23,15 +25,15 @@ const styles = {
     justifyContent: 'space-between'
   },
   button: {
-    height: 44,
-    width: '40%',
-    backgroundColor: 'green',
+    height: 66,
+    width: '45%',
+    backgroundColor: 'white',
     borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'grey',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 5
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: 'rgb(0, 122, 255)'
   }
 }
 
@@ -82,13 +84,13 @@ export default class DeckView extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.deckTitle}>{title}</Text>
-        <Text>{questions.length} cards</Text>
+        <Text style={styles.cardCount}>{questions.length} { questions.length === 1 ? "card" : "cards" }</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={this.navigateToNewQuestion}>
-            <Text style={{color: 'white'}}>Add Question</Text>
+            <Text style={styles.buttonText}>Add Question</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.navigateToQuiz}>
-            <Text style={{color: 'white'}}>Start Quiz</Text>
+            <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>

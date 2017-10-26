@@ -19,11 +19,14 @@ const styles = {
     borderWidth: 1
   },
   button: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'green',
-    padding: 22,
+    backgroundColor: 'white',
+    padding: 16,
+    paddingLeft: 44,
+    paddingRight: 44,
     borderRadius: 5
+  },
+  buttonText: {
+    color: 'rgb(0, 122, 255)'
   }
 }
 
@@ -72,7 +75,7 @@ export default class NewQuestion extends Component {
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={this.saveCard}>
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
       </View>
     );
